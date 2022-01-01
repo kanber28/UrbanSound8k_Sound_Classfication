@@ -112,7 +112,24 @@ print("Training completed in time: ", duration)
 test_accuracy=model.evaluate(X_test,y_test,verbose=0)
 print(test_accuracy[1])
 
-prediction_feature.shape
+#prediction_feature.shape
 
 X_test[1]
 model.predict_classes(X_test)
+while 1:
+    filename = input("Dosya Yolunu giriniz =>")
+    if filename == "quit":
+        break
+    #filename="./UrbanSound8K/audio/fold1/7061-6-0-0.wav"
+    audio, sample_rate = librosa.load(filename, res_type='kaiser_fast') 
+    mfccs_features = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40)
+    mfccs_scaled_features = np.mean(mfccs_features.T,axis=0)
+
+    print(mfccs_scaled_features)
+    mfccs_scaled_features=mfccs_scaled_features.reshape(1,-1)
+    print(mfccs_scaled_features)
+    print(mfccs_scaled_features.shape)
+    predicted_label=model.predict_classes(mfccs_scaled_features)
+    print(predicted_label)
+    prediction_class = labelencoder.inverse_transform(predicted_label) 
+    print(prediction_class)
