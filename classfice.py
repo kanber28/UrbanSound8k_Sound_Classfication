@@ -72,15 +72,15 @@ num_labels=y.shape[1]
 
 model=Sequential()
 ###first layer
-model.add(Dense(100,input_shape=(40,)))
+model.add(Dense(200,input_shape=(40,)))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 ###second layer
-model.add(Dense(200))
+model.add(Dense(400))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 ###third layer
-model.add(Dense(100))
+model.add(Dense(200))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
@@ -99,7 +99,7 @@ from datetime import datetime
 num_epochs = 100
 num_batch_size = 32
 
-checkpointer = ModelCheckpoint(filepath='saved_models/audio_classification.hdf5', 
+checkpointer = ModelCheckpoint(filepath='audio_classification.hdf5', 
                                verbose=1, save_best_only=True)
 start = datetime.now()
 
